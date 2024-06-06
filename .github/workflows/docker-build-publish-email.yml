@@ -23,7 +23,7 @@ jobs:
       run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/my-nodejs-app:latest
 
     - name: Send email notification
-      uses: hilarion5/send-mail@v1.0.6
+      uses: hilarion5/send-mail
       with:
         smtp-server: 'smtp.freesmtpservers.com'
         from: 'no-reply@github.com'
