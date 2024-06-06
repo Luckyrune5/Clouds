@@ -28,13 +28,3 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-nodejs-app:latest
-
-      - name: Send email notification
-        uses: hilarion5/send-email@v1.0.4
-        with:
-          host: smtp.freesmtpservers.com
-          port: 25
-          subject: Docker Image Build and Publish Status
-          to: your-email@example.com
-          from: your-email@example.com
-          content: Build and publish of Docker image was successful.
