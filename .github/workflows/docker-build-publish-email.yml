@@ -25,7 +25,7 @@ jobs:
     - name: Send email notification
       uses: hilarion5/send-mail@v1.0.6
       with:
-        smtp-server: 'smtp.open.mailserver.com'
+        smtp-server: 'smtp.freesmtpservers.com'
         from: 'no-reply@github.com'
         to: 'your-email@example.com'
         subject: 'Docker Image Build and Publish Status'
