@@ -1,0 +1,33 @@
+name: Build, Publish and Notify
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
+    - name: Build Docker image
+      run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/my-nodejs-app:latest .
+
+    - name: Push Docker image
+      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/my-nodejs-app:latest
+
+    - name: Send email notification
+      uses: hilarion5/send-mail@v1.0.6
+      with:
+        smtp-server: 'smtp.open.mailserver.com'
+        from: 'no-reply@github.com'
+        to: 'your-email@example.com'
+        subject: 'Docker Image Build and Publish Status'
+        body: 'The Docker image for your NodeJS project has been successfully built and published to Docker Hub.'
+
